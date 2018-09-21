@@ -5,14 +5,17 @@ using UnityEngine;
 public class ShapeGenerator
 {
     ShapeSetings shapeSetings;
+    NoiseFilter noiseFilter;
 
     public ShapeGenerator(ShapeSetings shapeSetings)
     {
         this.shapeSetings = shapeSetings;
+        noiseFilter = new NoiseFilter();
     }
 
     public Vector3 PointOnUnitPlanet(Vector3 pointOnUnitSphere)
     {
-        return pointOnUnitSphere * shapeSetings.planetRadius;
+        float elevation = noiseFilter.Evaluate(pointOnUnitSphere);
+        return pointOnUnitSphere * shapeSetings.planetRadius *(1+elevation);
     }
 }
