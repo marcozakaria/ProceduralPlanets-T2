@@ -12,11 +12,24 @@ MonoBehaviour:
   m_Name: Shape1
   m_EditorClassIdentifier: 
   planetRadius: 1
-  noiseSettings:
-    strength: 0.44
-    numLayers: 5
-    baseRoughness: 3
-    roughness: 2
-    presistance: 0.5
-    center: {x: 0, y: 0, z: 0}
-    minValue: 1.24
+  noiseLayers:
+  - enabled: 1
+    useFirstLayerAsMask: 0
+    noiseSettings:
+      strength: 0.12
+      numLayers: 4
+      baseRoughness: 0.55
+      roughness: 2.34
+      presistance: 0.54
+      center: {x: 0, y: 0, z: 0}
+      minValue: 1.06
+  - enabled: 1
+    useFirstLayerAsMask: 1
+    noiseSettings:
+      strength: 3.25
+      numLayers: 5
+      baseRoughness: 1.08
+      roughness: 1.95
+      presistance: 0.5
+      center: {x: 0, y: 0, z: 0}
+      minValue: 1.25
