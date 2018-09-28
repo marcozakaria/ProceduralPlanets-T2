@@ -23,10 +23,10 @@ public class NoiseFilter
         {
             float v = noise.Evaluate(point * frequency + settings.center);
             noiseValue += (v + 1) * 0.5f * amplitude; // (v + 1) * 0.5f  = to generate value in range of (0,1)
-            frequency *= settings.roughness;
-            amplitude *= settings.presistance;
+            frequency *= settings.roughness;  // when roughness is value grater than 1 frequency will increase with each layer
+            amplitude *= settings.presistance; // when presistance is less than one amplitude  will decrease by each layer
         }
-        //Debug.Log(noiseValue * settings.strength);
+        
         noiseValue = Mathf.Max(0, noiseValue - settings.minValue);
         return noiseValue * settings.strength;
     }
