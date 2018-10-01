@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RidgedNoiseFilter
+public class RidgedNoiseFilter : INoiseFilter
 {
-    NoiseSettings settings;
+    NoiseSettings.RidgedNoiseSettings settings;
     Noise noise = new Noise();
 
-    public RidgedNoiseFilter(NoiseSettings settings)
+    public RidgedNoiseFilter(NoiseSettings.RidgedNoiseSettings settings)
     {
         this.settings = settings;
     }
@@ -25,7 +25,7 @@ public class RidgedNoiseFilter
             float v = 1 - Mathf.Abs(noise.Evaluate(point * frequency + settings.center));  // 1-mathf.abs to make the value of sin wave is peak to get relistic details
             v *= v;  // square to make edges charper
             v *= weight;
-            weight = v;
+            weight = Mathf.Clamp01( v * settings.weightMultipier); // range from 0 to 1
 
             noiseValue += v * amplitude; // 1-mathf.abs() wil aleardy give us a value from (0 to 1)
             frequency *= settings.roughness;  // when roughness is value grater than 1 frequency will increase with each layer
