@@ -51,14 +51,15 @@ public class Planet : MonoBehaviour
                 GameObject meshObj = new GameObject("mesh");
                 meshObj.transform.parent = transform;
 
-                meshObj.AddComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Standard")); // add matrial to the shader
+                meshObj.AddComponent<MeshRenderer>(); 
                 meshFilter[i] = meshObj.AddComponent<MeshFilter>();
                 meshFilter[i].sharedMesh = new Mesh();
             }
+            meshFilter[i].GetComponent<MeshRenderer>().sharedMaterial = colorSettings.planetMaterial; // add matrial to the object
 
             terrainFaces[i] = new TerrainFace(shapeGenerator ,resolution, meshFilter[i].sharedMesh, directions[i]);
 
-            bool renderFace = faceRenderMask == FaceRenderMask.All || (int)faceRenderMask - 1 == i;
+            bool renderFace = faceRenderMask == FaceRenderMask.All || (int)faceRenderMask - 1 == i; // see if face is selcted or not
             meshFilter[i].gameObject.SetActive(renderFace);
         }
     }
